@@ -1,10 +1,10 @@
 import useSWR from 'swr';
 
-const fetcher = (...arg) => fetch(...arg).then((res) => res.json());
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const Swr = () => {
     const {
-        date: countries,
+        data: countries,
         error,
         isValidating,
     } = useSWR('https://restcountries.com/v2/all', fetcher);
@@ -16,12 +16,11 @@ const Swr = () => {
 
     return (
 
-        <div>
+        <div className='container'>
             {countries &&
-                countries.map((country, index) => {
+                countries.map((country, index) => (
                     <img key={index} src={country.flags.png} alt='flag' width={100} />
-                })
-            }
+                ))}
         </div>
     );
 };
